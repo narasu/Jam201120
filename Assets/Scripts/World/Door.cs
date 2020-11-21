@@ -2,17 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public class Door : Interactable
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void HandleInteraction()
     {
-        
+        base.HandleInteraction();
+        Debug.Log("interacting with door");
+        // goto next level / win screen
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.tag=="Player" && fsm.CurrentStateType == InteractableStateType.Off)
+        {
+            Highlight();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player" && fsm.CurrentStateType == InteractableStateType.Highlighted)
+        {
+            fsm.GotoState(InteractableStateType.Off);
+        }
     }
 }

@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
 
     public float startTime;
     [HideInInspector] public float timer;
-    
+
+    public GameObject door;
 
     private GameFSM fsm;
 
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
         fsm.Initialize(this);
 
         fsm.AddState(GameStateType.Play, new PlayState());
+        fsm.AddState(GameStateType.Win, new WinState());
         fsm.AddState(GameStateType.Dead, new DeadState());
 
         fsm.GotoState(GameStateType.Play);
