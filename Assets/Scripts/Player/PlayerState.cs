@@ -32,15 +32,38 @@ public class NormalState : PlayerState
     {
         
         player.grounded = ctrl.isGrounded;
-        if (player.grounded && player.velocity.y < 0)
+
+        if (player.grounded)
         {
-            player.velocity.y = 0f;
+            if (player.velocity.y < 0)
+            {
+                player.velocity.y = 0f;
+            }
+
+            player.animator.SetBool("isOnGround", true);
         }
+        else
+        {
+            player.animator.SetBool("isOnGround", false);
+        }
+
+        if (Input.GetAxisRaw("Horizontal") != 0) player.dashDirection = Input.GetAxisRaw("Horizontal");
+
+
 
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
         if (move != Vector3.zero)
         {
             player.transform.forward = move;
+        }
+
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+        {
+            player.animator.SetBool("isMoving", true);
+        }
+        else if (move==Vector3.zero)
+        {
+            player.animator.SetBool("isMoving", false);
         }
         
         ctrl.Move(move * Time.deltaTime * player.speed);
@@ -53,7 +76,11 @@ public class NormalState : PlayerState
         player.velocity.y += player.gravity * Time.deltaTime;
         ctrl.Move(player.velocity * Time.deltaTime);
 
-        if (Input.GetButtonDown("Dodge") && player.canDash) owner.GotoState(PlayerStateType.Dash);
+        if (Input.GetButtonDown("Dodge") && player.canDash)
+        {
+            
+            owner.GotoState(PlayerStateType.Dash);
+        }
     }
 
     public override void Exit()
@@ -64,19 +91,21 @@ public class NormalState : PlayerState
 public class DashState : PlayerState
 {
     
+
     float t = 0f;
+    float dir;
 
     public override void Enter()
     {
         Debug.Log("Dashing");
-        //player.animator.SetBool(2, true);
+        player.animator.SetBool("isDashing", true);
     }
 
     public override void Update()
     {
         if(t < player.dashTime)
         {
-            player.controller.Move(new Vector3(Input.GetAxisRaw("Horizontal") * player.dashSpeed * Time.deltaTime, 0));
+            player.controller.Move(new Vector3(player.dashDirection * player.dashSpeed * Time.deltaTime, 0));
             t += Time.deltaTime;
         }
         else
@@ -84,10 +113,6 @@ public class DashState : PlayerState
             t = 0;
             owner.GotoState(PlayerStateType.Normal);
         }
-        //player.velocity.y += player.gravity * Time.deltaTime;
-
-        
-
     }
 
 
@@ -96,6 +121,8 @@ public class DashState : PlayerState
         player.canDash = false;
         player.dashTimer = player.dashCooldown;
 
-        //player.animator.SetBool(2, false);
+        player.animator.SetBool("isDashing", false);
     }
+
+    public void SetDirection(float _dir) => dir = _dir;
 }

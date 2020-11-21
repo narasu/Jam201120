@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     public float dashCooldown = 0.2f;
     internal float dashTimer = 0f;
     internal bool canDash = true;
+    internal float dashDirection = 1;
 
     internal Animator animator;
 
@@ -60,6 +61,6 @@ public class Player : MonoBehaviour
             canDash = true;
         }
             
-
+        
     }
 }
