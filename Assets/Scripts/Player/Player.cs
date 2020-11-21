@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     internal float dashTimer = 0f;
     internal bool canDash = true;
 
+    internal Animator animator;
 
     private void Awake()
     {
@@ -38,6 +39,7 @@ public class Player : MonoBehaviour
         fsm.AddState(PlayerStateType.Dash, new DashState());
         
         controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
