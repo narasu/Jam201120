@@ -69,6 +69,7 @@ public class DashState : PlayerState
     public override void Enter()
     {
         Debug.Log("Dashing");
+        //player.animator.SetBool(2, true);
     }
 
     public override void Update()
@@ -94,5 +95,7 @@ public class DashState : PlayerState
     {
         player.canDash = false;
         player.dashTimer = player.dashCooldown;
+
+        //player.animator.SetBool(2, false);
     }
 }

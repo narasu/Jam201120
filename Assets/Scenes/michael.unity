@@ -312,7 +312,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-133418
+  m_Name: pb_Mesh-175338
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -682,7 +682,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-133432
+  m_Name: pb_Mesh-175352
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -851,21 +851,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 438456730936473569, guid: 82395f16760c4a44e813cd43c9ecf03a,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 438456730936473572, guid: 82395f16760c4a44e813cd43c9ecf03a,
-        type: 3}
-      propertyPath: gravity
-      value: -30
-      objectReference: {fileID: 0}
-    - target: {fileID: 438456730936473572, guid: 82395f16760c4a44e813cd43c9ecf03a,
-        type: 3}
-      propertyPath: jumpHeight
-      value: 2.06
-      objectReference: {fileID: 0}
     - target: {fileID: 438456730936473573, guid: 82395f16760c4a44e813cd43c9ecf03a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -874,7 +859,7 @@ PrefabInstance:
     - target: {fileID: 438456730936473573, guid: 82395f16760c4a44e813cd43c9ecf03a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.559
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 438456730936473573, guid: 82395f16760c4a44e813cd43c9ecf03a,
         type: 3}
