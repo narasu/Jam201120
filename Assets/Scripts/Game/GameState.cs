@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameStateType { Play, Dead }
+public enum GameStateType { Play, Win, Dead }
 
 public abstract class GameState
 {
@@ -31,7 +31,7 @@ public class PlayState : GameState
     {
         gm.timer -= Time.deltaTime;
 
-        if (gm.timer <= 0) owner.GotoState(GameStateType.Dead);
+        if (gm.timer <= 0) owner.GotoState(GameStateType.Win);
     }
 
     public override void Exit()
@@ -40,11 +40,29 @@ public class PlayState : GameState
     }
 }
 
+public class WinState : GameState
+{
+    public override void Enter()
+    {
+        gm.door.SetActive(true);
+    }
+
+    public override void Update()
+    {
+
+    }
+
+    public override void Exit()
+    {
+
+    }
+}
+
 public class DeadState : GameState
 {
     public override void Enter()
     {
-
+        //ded
     }
 
     public override void Update()
