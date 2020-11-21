@@ -30,7 +30,6 @@ public class PlayState : GameState
     public override void Update()
     {
         gm.timer -= Time.deltaTime;
-        Debug.Log(gm.timer);
 
         if (gm.timer <= 0) owner.GotoState(GameStateType.Dead);
     }

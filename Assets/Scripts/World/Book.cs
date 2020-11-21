@@ -18,7 +18,6 @@ public class Book : MonoBehaviour
 
     void Update()
     {
-        
         //update rotation
         float f = GameManager.Instance.timer / GameManager.Instance.startTime;
         Vector3 angle = new Vector3((maxAngle * f) - maxAngle, transform.rotation.y, transform.rotation.z);
