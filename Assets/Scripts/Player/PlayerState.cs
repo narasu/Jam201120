@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerStateType { Normal, Diving, Rolling }
+public enum PlayerStateType { Normal, Dash }
 
 public abstract class PlayerState
 {
@@ -53,58 +53,46 @@ public class NormalState : PlayerState
         player.velocity.y += player.gravity * Time.deltaTime;
         ctrl.Move(player.velocity * Time.deltaTime);
 
-        if (Input.GetButtonDown("Dodge"))
-        {
-            owner.GotoState(PlayerStateType.Diving);
-        }
+        if (Input.GetButtonDown("Dodge") && player.canDash) owner.GotoState(PlayerStateType.Dash);
     }
 
     public override void Exit()
     {
-        
+        player.velocity.y = 0;
     }
 }
-public class RollingState : PlayerState
+public class DashState : PlayerState
 {
     
+    float t = 0f;
+
     public override void Enter()
     {
-        Debug.Log("Rolling");
+        Debug.Log("Dashing");
     }
 
     public override void Update()
     {
-        // if finished rolling  owner.GotoState(PlayerStateType.Normal);
+        if(t < player.dashTime)
+        {
+            player.controller.Move(new Vector3(Input.GetAxisRaw("Horizontal") * player.dashSpeed * Time.deltaTime, 0));
+            t += Time.deltaTime;
+        }
+        else
+        {
+            t = 0;
+            owner.GotoState(PlayerStateType.Normal);
+        }
+        //player.velocity.y += player.gravity * Time.deltaTime;
+
+        
+
     }
+
 
     public override void Exit()
     {
-
-    }
-}
-public class DivingState : PlayerState
-{
-    public override void Enter()
-    {
-        Debug.Log("Diving");
-        player.transform.Rotate(new Vector3(90, 0));
-        
-    }
-
-    public override void Update()
-    {
-        //player.controller.Move(new Vector3(Input * Time.deltaTime, 0));
-
-        player.velocity.y += player.gravity * Time.deltaTime;
-        player.controller.Move(player.velocity * Time.deltaTime);
-
-        if (player.grounded) owner.GotoState(PlayerStateType.Rolling);
-
-        
-    }
-
-    public override void Exit()
-    {
-
+        player.canDash = false;
+        player.dashTimer = player.dashCooldown;
     }
 }
