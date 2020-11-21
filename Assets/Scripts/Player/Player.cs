@@ -13,47 +13,57 @@ public class Player : MonoBehaviour
             return instance;
         }
     }
-    
-    private CharacterController controller;
-    private Vector3 playerVelocity;
-    private bool groundedPlayer;
-    public float walkSpeed = 8.0f;
-    public float sprintSpeed = 14.0f;
-    private float playerSpeed;
-    public float jumpHeight = 2.0f;
-    public float gravityValue = -9.81f;
 
-    [HideInInspector] public bool onGround;
+    PlayerFSM fsm;
+    
+    internal CharacterController controller;
+    internal Vector3 velocity;
+    internal bool grounded;
+    public float speed = 8.0f;
+    public float jumpHeight = 2.0f;
+    public float gravity = -9.81f;
+
+
+    private void Awake()
+    {
+        fsm = new PlayerFSM();
+        fsm.Initialize(this);
+        fsm.AddState(PlayerStateType.Normal, new NormalState());
+        fsm.AddState(PlayerStateType.Rolling, new RollingState());
+        fsm.AddState(PlayerStateType.Diving, new DivingState());
+        
+        controller = GetComponent<CharacterController>();
+    }
 
     private void Start()
     {
-        controller = GetComponent<CharacterController>();
-        playerSpeed = walkSpeed;
+        fsm.GotoState(PlayerStateType.Normal);
     }
 
     void Update()
     {
-        groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
-        {
-            playerVelocity.y = 0f;
-        }
+        fsm.UpdateState();
+        
+        //grounded = controller.isGrounded;
+        //if (grounded && velocity.y < 0)
+        //{
+        //    velocity.y = 0f;
+        //}
 
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        //Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
+        //if (move != Vector3.zero)
+        //{
+        //    gameObject.transform.forward = move;
+        //}
+        //controller.Move(move * Time.deltaTime * speed);
 
-        if (move != Vector3.zero)
-        {
-            gameObject.transform.forward = move;
-        }
+        //if (Input.GetButtonDown("Jump") && grounded)
+        //{
+        //    Debug.Log("jumping");
+        //    velocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+        //}
 
-        // Changes the height position of the player..
-        if (Input.GetButtonDown("Jump") && groundedPlayer)
-        {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        }
-
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        //velocity.y += gravity * Time.deltaTime;
+        //controller.Move(velocity * Time.deltaTime);
     }
 }
