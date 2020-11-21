@@ -23,14 +23,19 @@ public class Player : MonoBehaviour
     public float jumpHeight = 2.0f;
     public float gravity = -9.81f;
 
+    public float dashSpeed = 16.0f;
+    public float dashTime = 0.2f;
+    public float dashCooldown = 0.2f;
+    internal float dashTimer = 0f;
+    internal bool canDash = true;
+
 
     private void Awake()
     {
         fsm = new PlayerFSM();
         fsm.Initialize(this);
         fsm.AddState(PlayerStateType.Normal, new NormalState());
-        fsm.AddState(PlayerStateType.Rolling, new RollingState());
-        fsm.AddState(PlayerStateType.Diving, new DivingState());
+        fsm.AddState(PlayerStateType.Dash, new DashState());
         
         controller = GetComponent<CharacterController>();
     }
@@ -43,27 +48,16 @@ public class Player : MonoBehaviour
     void Update()
     {
         fsm.UpdateState();
-        
-        //grounded = controller.isGrounded;
-        //if (grounded && velocity.y < 0)
-        //{
-        //    velocity.y = 0f;
-        //}
 
-        //Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
-        //if (move != Vector3.zero)
-        //{
-        //    gameObject.transform.forward = move;
-        //}
-        //controller.Move(move * Time.deltaTime * speed);
+        if (dashTimer > 0)
+        {
+            dashTimer -= Time.deltaTime;
+        }
+        else if (grounded)
+        {
+            canDash = true;
+        }
+            
 
-        //if (Input.GetButtonDown("Jump") && grounded)
-        //{
-        //    Debug.Log("jumping");
-        //    velocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
-        //}
-
-        //velocity.y += gravity * Time.deltaTime;
-        //controller.Move(velocity * Time.deltaTime);
     }
 }

@@ -856,6 +856,16 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 24
       objectReference: {fileID: 0}
+    - target: {fileID: 438456730936473572, guid: 82395f16760c4a44e813cd43c9ecf03a,
+        type: 3}
+      propertyPath: gravity
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 438456730936473572, guid: 82395f16760c4a44e813cd43c9ecf03a,
+        type: 3}
+      propertyPath: jumpHeight
+      value: 2.06
+      objectReference: {fileID: 0}
     - target: {fileID: 438456730936473573, guid: 82395f16760c4a44e813cd43c9ecf03a,
         type: 3}
       propertyPath: m_LocalPosition.x
