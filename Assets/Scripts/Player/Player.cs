@@ -30,10 +30,15 @@ public class Player : MonoBehaviour
     internal bool canDash = true;
     internal float dashDirection = 1;
 
+    public int health = 3;
+
     internal Animator animator;
+
+    
 
     private void Awake()
     {
+        instance = this; 
         fsm = new PlayerFSM();
         fsm.Initialize(this);
         fsm.AddState(PlayerStateType.Normal, new NormalState());
@@ -62,5 +67,19 @@ public class Player : MonoBehaviour
         }
             
         
+    }
+
+    public void TakeDamage()
+    {
+        health--;
+        Debug.Log("Health: " + health);
+        if (health == 0) Die();
+    }
+
+    private void Die()
+    {
+        Debug.Log("dead");
+        // ded
+        // go to dead screen
     }
 }
