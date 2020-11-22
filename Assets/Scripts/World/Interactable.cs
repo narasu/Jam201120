@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour, IPressable
 {
-    [Header("Sprites")]
-    public Sprite buttonPressSprite;
-
+    
     [HideInInspector] public SpriteRenderer spriteRenderer;
     protected InteractableFSM fsm;
 
-    public Transform player;
-
+    public List<GameObject> highlightObjects;
     protected void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         fsm = new InteractableFSM();
+        foreach (GameObject o in highlightObjects) o.SetActive(false);
     }
 
     void Start()
