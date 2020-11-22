@@ -31,8 +31,12 @@ public class Player : MonoBehaviour
     internal float dashDirection = 1;
 
     public int health = 3;
+    public float hitCooldown = 0f;
 
     internal Animator animator;
+    public SkinnedMeshRenderer mesh;
+    public Material normal;
+    public Material cooldown;
 
     private void Awake()
     {
@@ -63,11 +67,24 @@ public class Player : MonoBehaviour
         {
             canDash = true;
         }
-            
+        
+        if (hitCooldown >= 0f)
+        {
+            mesh.material = cooldown;
+            hitCooldown -= Time.deltaTime;
+        }
+        else
+        {
+            mesh.material = normal;
+        }
         
     }
     public void TakeDamage()
     {
+        if (hitCooldown > 0f)
+            return;
+
+        hitCooldown = 2.0f;
         health--;
         Debug.Log("Health: " + health);
         if (health == 0) Die();

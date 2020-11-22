@@ -340,6 +340,10 @@ MonoBehaviour:
   dashTime: 0.2
   dashCooldown: 0.2
   health: 3
+  hitCooldown: 1
+  mesh: {fileID: 8287003993671893500}
+  normal: {fileID: 2100000, guid: b5682f84ef0fdd743ba4093d980c1858, type: 2}
+  cooldown: {fileID: 2100000, guid: a94fb58f1e805ce459792b09ff16861d, type: 2}
 --- !u!1 &3096536699628658389
 GameObject:
   m_ObjectHideFlags: 0

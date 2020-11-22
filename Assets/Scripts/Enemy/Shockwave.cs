@@ -11,4 +11,12 @@ public class Shockwave : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Player.Instance.TakeDamage();
+        }
+    }
 }
