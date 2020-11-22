@@ -75,12 +75,13 @@ public class NormalState : PlayerState
         }
         player.velocity.y += player.gravity * Time.deltaTime;
         ctrl.Move(player.velocity * Time.deltaTime);
-
+        
+        /*
         if (Input.GetButtonDown("Dodge") && player.canDash)
         {
             
             owner.GotoState(PlayerStateType.Dash);
-        }
+        }*/
     }
 
     public override void Exit()

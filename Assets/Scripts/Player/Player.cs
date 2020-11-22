@@ -34,8 +34,6 @@ public class Player : MonoBehaviour
 
     internal Animator animator;
 
-    
-
     private void Awake()
     {
         instance = this; 
@@ -68,7 +66,6 @@ public class Player : MonoBehaviour
             
         
     }
-
     public void TakeDamage()
     {
         health--;

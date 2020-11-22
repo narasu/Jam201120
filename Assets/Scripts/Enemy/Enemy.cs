@@ -17,11 +17,19 @@ public class Enemy : MonoBehaviour
     public GameObject projectile;
     internal bool finishedFiring = true;
 
+
+    public GameObject shockwave;
+
+    
+
     internal Animator animator;
 
     private void Awake()
     {
         instance = this;
+
+        animator = GetComponent<Animator>();
+
         fsm = new EnemyFSM();
         fsm.Initialize(this);
 
@@ -41,7 +49,6 @@ public class Enemy : MonoBehaviour
     public EnemyStateType GetRandomState()
     {
         EnemyStateType e = (EnemyStateType)Random.Range(1, 4);
-        Debug.Log(e);
         return e;
     }
 
@@ -50,11 +57,26 @@ public class Enemy : MonoBehaviour
         for (int i=0; i<num; i++)
         {
             
-            GameObject p = Instantiate(projectile);
-            p.transform.position = new Vector3(Random.Range(-15.0f, 15.0f), 15.0f, -10f);
+            GameObject p1 = Instantiate(projectile);
+            p1.transform.position = new Vector3(Random.Range(-15.0f, 15.0f), 15.0f, -12.5f);
+            GameObject p2 = Instantiate(projectile);
+            p2.transform.position = new Vector3(Random.Range(-15.0f, 15.0f), 15.0f, -12.5f);
             yield return new WaitForSeconds(frequency);
         }
         finishedFiring = true;
+    }
+
+    public void SpawnShockwaves()
+    {
+        GameObject left = Instantiate(shockwave);
+        left.transform.position = new Vector3(-1f, 1f, -12.5f);
+        Shockwave sl = left.GetComponent<Shockwave>();
+        sl.rb.velocity = Vector3.left * sl.speed;
+
+        GameObject right = Instantiate(shockwave);
+        right.transform.position = new Vector3(1f, 1f, -12.5f);
+        Shockwave sr = right.GetComponent<Shockwave>();
+        sr.rb.velocity = Vector3.right * sr.speed;
     }
 
     private void OnCollisionEnter(Collision collision)
