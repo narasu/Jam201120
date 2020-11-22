@@ -14,7 +14,6 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("hit");
         if (collision.collider.tag == "Player")
         {
             Player.Instance.TakeDamage();

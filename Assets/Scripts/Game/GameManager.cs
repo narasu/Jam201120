@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float timer;
 
     public GameObject door;
+    public Text healthText;
 
     private GameFSM fsm;
 
@@ -39,5 +41,6 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         fsm.UpdateState();
+        healthText.text = "Health: " + Player.Instance.health;
     }
 }

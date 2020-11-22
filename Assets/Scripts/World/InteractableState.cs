@@ -25,6 +25,8 @@ public class OffState : InteractableState
     public override void Enter()
     {
         //interactable.spriteRenderer.sprite = interactable.normalSprite;
+        foreach (GameObject o in interactable.highlightObjects) o.SetActive(false);
+
     }
     public override void Update()
     {
@@ -40,7 +42,7 @@ public class HighlightedState : InteractableState
     public override void Enter()
     {
         Debug.Log("enter highlighted");
-        //interactable.spriteRenderer.sprite = interactable.highlightedSprite;
+        foreach (GameObject o in interactable.highlightObjects) o.SetActive(true);
     }
     public override void Update()
     {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Door : Interactable
 {
+    
     public override void HandleInteraction()
     {
         base.HandleInteraction();
