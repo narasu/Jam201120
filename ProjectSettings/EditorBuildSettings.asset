@@ -5,9 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 11b2dfae01b88364f8aeca761d132ad6
+  - enabled: 1
+    path: Assets/Scenes/Inbetween-Tutorial.unity
+    guid: c5a3d0ae7d715b94981fb4733efe4fb0
   - enabled: 1
     path: Assets/Scenes/SkeletoniFinal.unity
     guid: d539000316ac5d342a24e3bb8370d6f8
@@ -17,10 +23,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Death.unity
     guid: 009376ff82ef7524a8bbcad4d41c3bb1
-  - enabled: 1
-    path: Assets/Scenes/Main Menu.unity
-    guid: 11b2dfae01b88364f8aeca761d132ad6
-  - enabled: 1
-    path: Assets/Scenes/Inbetween-Tutorial.unity
-    guid: c5a3d0ae7d715b94981fb4733efe4fb0
   m_configObjects: {}
